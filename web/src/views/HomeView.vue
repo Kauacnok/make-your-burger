@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="mt-12 mb-7 mx-8 min-h-[250px] text-center text-4xl text-gray-800">
     <h1>HOME</h1>
   </div>
 </template>
