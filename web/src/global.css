@@ -8,3 +8,13 @@
 	padding: 0px;
 	box-sizing: border-box;
 }
+
+#main-banner {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 500px;
+	background-image: url('../public/assets/burger.jpg');
+	background-position: 0 -250px;
+	background-size: cover;
+}
