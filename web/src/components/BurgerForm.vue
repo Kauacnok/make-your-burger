@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<p>Componente de mensagem</p>
+		<Message :msg="message" v-show="message" />
 		<div class="max-w-[400px] mx-auto ">
 			<form @submit="createBurger">
 				<div class="flex flex-col mb-5">
@@ -73,6 +73,8 @@
 </template>
 
 <script>
+	import Message from './Message'
+
 	export default {
 		name: 'BurgerForm',
 		data() {
@@ -86,6 +88,9 @@
 				optionals: [],
 				message: null
 			}
+		},
+		components: {
+			Message
 		},
 		methods: {
 			async getIngredients() {
@@ -114,6 +119,14 @@
 					headers: {"Content-Type": "application/json"},
 					body: dataJson
 				})
+
+				const res = await req.json()
+
+				this.message = `Pedido Nº ${res.id} realizado com sucesso`
+
+				setTimeout(() => {
+					this.message = null
+				}, 5000)
 
 				this.name = ""
 				this.bread = ""
