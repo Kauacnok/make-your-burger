@@ -77,5 +77,41 @@
       "type": "Finalizado"
     }
   ],
-  "burgers": []
+  "burgers": [
+    {
+      "name": "Matheus Battisti",
+      "bread": "Italiano Branco",
+      "meat": "Picanha",
+      "optionals": [
+        "Bacon",
+        "Salame",
+        "Cheddar"
+      ],
+      "status": "Solicitado",
+      "id": 1
+    },
+    {
+      "name": "Kauã",
+      "bread": "Parmesão e Orégano",
+      "meat": "Picanha",
+      "optionals": [
+        "Bacon",
+        "Cheddar",
+        "Tomate",
+        "Pepino"
+      ],
+      "status": "Solicitado",
+      "id": 2
+    },
+    {
+      "name": "s",
+      "bread": "Italiano Branco",
+      "meat": "Maminha",
+      "optionals": [
+        "Cebola roxa"
+      ],
+      "status": "Solicitado",
+      "id": 3
+    }
+  ]
 }

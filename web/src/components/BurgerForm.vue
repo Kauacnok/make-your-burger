@@ -2,7 +2,7 @@
 	<div>
 		<p>Componente de mensagem</p>
 		<div class="max-w-[400px] mx-auto ">
-			<form>
+			<form @submit="createBurger">
 				<div class="flex flex-col mb-5">
 					<label 
 						for="name"
@@ -84,7 +84,6 @@
 				bread: null,
 				meat: null,
 				optionals: [],
-				status: "Solicitado",
 				message: null
 			}
 		},
@@ -96,6 +95,30 @@
 				this.breads = data.breads
 				this.meats = data.meats
 				this.optionalsData = data.optionals
+			},
+			async createBurger(event) {
+				event.preventDefault()
+
+				const data = {
+					name: this.name,
+					bread: this.bread,
+					meat: this.meat,
+					optionals: Array.from(this.optionals),
+					status: "Solicitado"
+				}
+
+				const dataJson = JSON.stringify(data)
+
+				const req = await fetch('http://localhost:3000/burgers', {
+					method: "POST",
+					headers: {"Content-Type": "application/json"},
+					body: dataJson
+				})
+
+				this.name = ""
+				this.bread = ""
+				this.meat = ""
+				this.optionals = []
 			}
 		},
 		mounted() {
