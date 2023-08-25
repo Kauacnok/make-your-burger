@@ -27,7 +27,7 @@
 					</label>
 					<select name="bread" id="bread" v-model="bread" class="py-1 px-3 w-[300px]" >
 						<option value="">Selecione o seu pão</option>
-						<option value="integral">Integral</option>
+						<option v-for="bread in breads" :key="bread.id" :value="bread.type">{{bread.type}}</option>
 					</select>
 				</div>
 				<div class="flex flex-col mb-5">
@@ -37,30 +37,26 @@
 					>
 						Escolha a carne do seu Burger:
 					</label>
-					<select name="meal" id="meal" v-model="meal" class="py-1 px-3 w-[300px]" >
-						<option value="">Selecione o seu pão</option>
-						<option value="maminha">Maminha</option>
+					<select name="meat" id="meat" v-model="meat" class="py-1 px-3 w-[300px]" >
+						<option value="">Selecione a sua carne</option>
+						<option v-for="meat in meats" :key="meat.id" :value="meat.type">{{meat.type}}</option>
 					</select>
 				</div>
 				<div class="flex flex-col mb-5">
 					<label 
-						for="meal"
+						for="optionals"
 						class="w-[100%] font-bold mb-3 text-gray-800 py-1 px-3 border-l-[4px] border-yellow-400"
 					>
 						Selecione os opcionais:
 					</label>
 					<div class="flex flex-row flex-wrap">
-						<div class="flex flex-row flex-wrap gap-2 justify-start w-1/2 mb-5">
-							<input type="checkbox" name="optionals" v-model="optionals" value="salame">
-							<span class="font-bold">Salame</span>
-						</div>
-						<div class="flex flex-row flex-wrap gap-2 justify-start w-1/2 mb-5">
-							<input type="checkbox" name="optionals" v-model="optionals" value="salame">
-							<span class="font-bold">Salame</span>
-						</div>
-						<div class="flex flex-row flex-wrap gap-2 justify-start w-1/2 mb-5">
-							<input type="checkbox" name="optionals" v-model="optionals" value="salame">
-							<span class="font-bold">Salame</span>
+						<div 
+							class="flex flex-row flex-wrap gap-2 justify-start w-1/2 mb-5"
+							v-for="optional in optionalsData"
+							:key="optional.id"
+						>
+							<input type="checkbox" name="optionals" v-model="optionals" :value="optional.type">
+							<span class="font-bold">{{optional.type}}</span>
 						</div>
 					</div>
 				</div>
@@ -78,6 +74,32 @@
 
 <script>
 	export default {
-		name: 'BurgerForm'
+		name: 'BurgerForm',
+		data() {
+			return {
+				breads: null,
+				meats: null,
+				optionalsData: null,
+				name: null,
+				bread: null,
+				meat: null,
+				optionals: [],
+				status: "Solicitado",
+				message: null
+			}
+		},
+		methods: {
+			async getIngredients() {
+				const req = await fetch("http://localhost:3000/ingredients")
+				const data = await req.json()
+
+				this.breads = data.breads
+				this.meats = data.meats
+				this.optionalsData = data.optionals
+			}
+		},
+		mounted() {
+			this.getIngredients()
+		}
 	}
 </script>
