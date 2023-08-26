@@ -11,19 +11,20 @@
 			</div>
 		</div>
 		<div class="flex flex-wrap">
-			<div class="flex flex-wrap p-3 w-full p-3 border-b border-gray-700">
-				<div class="w-[5%]">1</div>
-				<div class="w-[16%]">João</div>
-				<div class="w-[16%]">Pão de trigo</div>
-				<div class="w-[16%]">Picanha</div>
+			<div class="flex flex-wrap p-3 w-full p-3 border-b border-gray-700" v-for="burger in burgers" :key="burger.id">
+				<div class="w-[5%]">{{ burger.id }}</div>
+				<div class="w-[16%]">{{ burger.name }}</div>
+				<div class="w-[16%]">{{ burger.bread }}</div>
+				<div class="w-[16%]">{{ burger.meat }}</div>
 				<div class="w-[16%]">
 					<ul>
-						<li>Salame</li>
-						<li>Tomate</li>
+						<li v-for="(optional, index) in burger.optionals" :key="index">
+							{{ optional }}
+						</li>
 					</ul>
 				</div>
-				<div class="flex">
-					<select name="status" class="h-full bg-transparent border-[2px] border-gray-800 text-gray-800 mb-2 p-2 mr-3">
+				<div class="flex justify-center items-center">
+					<select name="status" class="bg-transparent border-[2px] border-gray-800 text-gray-800 py-3 p-2 mr-3">
 						<option value="">Selecione</option>
 					</select>
 					<button 
@@ -39,5 +40,26 @@
 </template>
 
 <script>
-	name: "Dashboard"
+	export default {
+		name: "Dashboard",
+		data() {
+			return {
+				burgers: null,
+				burgers_id: null,
+				status: []
+			}
+		},
+		methods: {
+			async getOrders() {
+				const req = await fetch('http://localhost:3000/burgers')
+
+				const data = await req.json()
+
+				this.burgers = data
+			}
+		},
+		mounted() {
+			this.getOrders()
+		}
+	}
 </script>
