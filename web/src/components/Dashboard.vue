@@ -26,6 +26,7 @@
 				<div class="flex justify-center items-center">
 					<select name="status" class="bg-transparent border-[2px] border-gray-800 text-gray-800 py-3 p-2 mr-3">
 						<option value="">Selecione</option>
+						<option v-for="s in status" :key="s.id" :value="s.type" :selected="burger.status == s.type">{{ s.type }}</option>
 					</select>
 					<button 
 						class="bg-gray-800 text-yellow-500 font-bold border-[2px] rounded border-gray-800 p-2 text-xl mx-auto cursor-pointer transition-[0.5] hover:bg-transparent hover:text-gray-800" 
@@ -56,6 +57,15 @@
 				const data = await req.json()
 
 				this.burgers = data
+
+				this.getStatus()
+			},
+			async getStatus() {
+				const req = await fetch('http://localhost:3000/status')
+
+				const data = await req.json()
+
+				this.status = data
 			}
 		},
 		mounted() {
