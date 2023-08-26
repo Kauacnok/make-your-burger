@@ -1,11 +1,16 @@
 <template>
-  <div class="mt-12 mb-7 mx-8 min-h-[250px] text-center text-4xl text-gray-800">
-    <h1>Pedidos</h1>
-  </div>
+	<div class="mt-12 mb-7 mx-8 min-h-[450px]">
+		<h1 class="text-center text-4xl text-gray-800">Gerenciar pedidos</h1>
+		<Dashboard />
+	</div>
 </template>
 
-<script lang="ts">
+<script>
+	import Dashboard from '../components/Dashboard'
 	export default {
-		name: 'OrdersView'
+		name: 'OrdersView',
+		components: {
+			Dashboard
+		}
 	}
 </script>
