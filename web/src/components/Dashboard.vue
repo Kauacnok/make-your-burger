@@ -1,5 +1,6 @@
 <template>
 	<div class="max-w-[1200px] max-h-[1400px] mx-auto">
+		<Message :msg="message" v-show="message" />
 		<div>
 			<div class="flex flex-wrap font-bold p-3 border-b-[3px] border-gray-800">
 				<div class="w-[5%]">#:</div>
@@ -42,14 +43,20 @@
 </template>
 
 <script>
+	import Message from './Message'
+
 	export default {
 		name: "Dashboard",
 		data() {
 			return {
 				burgers: null,
 				burgers_id: null,
-				status: []
+				status: [],
+				message: null
 			}
+		},
+		components: {
+			Message
 		},
 		methods: {
 			async getOrders() {
@@ -75,6 +82,12 @@
 
 				const res = await req.json()
 
+				this.message = `Pedido Nº ${id} removido com sucesso!`
+
+				setTimeout(() => {
+					this.message = null
+				}, 5000)
+
 				this.getOrders()
 			},
 			async updateStatusBurger(event, id) {
@@ -89,6 +102,12 @@
 				})
 
 				const res = await req.json()
+
+				this.message = `Pedido Nº ${res.id} teve seu status atualizado para ${res.status}`
+
+				setTimeout(() => {
+					this.message = null
+				}, 5000)
 			}
 		},
 		mounted() {
