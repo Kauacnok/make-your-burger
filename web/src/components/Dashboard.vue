@@ -24,7 +24,7 @@
 					</ul>
 				</div>
 				<div class="flex justify-center items-center">
-					<select name="status" class="bg-transparent border-[2px] border-gray-800 text-gray-800 py-3 p-2 mr-3">
+					<select name="status" class="bg-transparent border-[2px] border-gray-800 text-gray-800 py-3 p-2 mr-3" @change="updateStatusBurger($event, burger.id)">
 						<option value="">Selecione</option>
 						<option v-for="s in status" :key="s.id" :value="s.type" :selected="burger.status == s.type">{{ s.type }}</option>
 					</select>
@@ -76,6 +76,19 @@
 				const res = await req.json()
 
 				this.getOrders()
+			},
+			async updateStatusBurger(event, id) {
+				const option = event.target.value
+
+				const dataJson = JSON.stringify({ status: option })
+
+				const req = await fetch(`http://localhost:3000/burgers/${id}`, {
+					method: "PATCH",
+					headers: {"Content-Type": "application/json"},
+					body: dataJson
+				})
+
+				const res = await req.json()
 			}
 		},
 		mounted() {
