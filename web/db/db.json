@@ -104,26 +104,16 @@
       "id": 2
     },
     {
-      "name": "s",
-      "bread": "Italiano Branco",
-      "meat": "Maminha",
+      "name": "Allan Scott",
+      "bread": "Integral",
+      "meat": "Veggie burger",
       "optionals": [
+        "Tomate",
+        "Pepino",
         "Cebola roxa"
       ],
       "status": "Solicitado",
-      "id": 3
-    },
-    {
-      "name": "Carlos",
-      "bread": "Italiano Branco",
-      "meat": "Veggie burger",
-      "optionals": [
-        "Bacon",
-        "Cheddar",
-        "Pepino"
-      ],
-      "status": "Solicitado",
-      "id": 4
+      "id": 5
     }
   ]
 }

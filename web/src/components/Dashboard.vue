@@ -31,6 +31,7 @@
 					<button 
 						class="bg-gray-800 text-yellow-500 font-bold border-[2px] rounded border-gray-800 p-2 text-xl mx-auto cursor-pointer transition-[0.5] hover:bg-transparent hover:text-gray-800" 
 						type="button"
+						@click="deleteBurger(burger.id)"
 					>
 							Cancelar
 					</button>
@@ -66,6 +67,15 @@
 				const data = await req.json()
 
 				this.status = data
+			},
+			async deleteBurger(id) {
+				const req = await fetch(`http://localhost:3000/burgers/${id}`, {
+					method: "DELETE"
+				})
+
+				const res = await req.json()
+
+				this.getOrders()
 			}
 		},
 		mounted() {
